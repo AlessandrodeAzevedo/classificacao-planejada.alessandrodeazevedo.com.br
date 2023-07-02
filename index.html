@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação planejada</title>
+    <link rel="stylesheet" href="./style_custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-3">
+        <h1>Classificação planejada</h1> 
+        <h6>(by Alessandro de Azevedo)</h6>
+        <p>
+            Me chamo Alessandro e sempre acompanhei a classificação planejada do Rica perrone, mas ficava sempre angustiado quando demorava pra sair kkk, vendo isso resolvi montar esse sistema para conseguir acompanhar praticamente em tempo real o resultado da tabela.
+        </p> 
+        <p>
+            Rica perrone é um jornalista muito conhecido e sempre posta a classificação planejada em seu blog no <a href="https://pingback.com/ricaperrone/" target="_blank"> https://pingback.com/ricaperrone/ </a>, se você não conhece, não sabe porque a tabela está diferente, ou não sabe o que é isso, recomendo fortemente que vá lá no site pra entender exatamente o que está acontecendo aqui, a explicação aqui vai ser bem superficial e o Rica pode fazer mudanças na previsão dele que podem com o passar do tempo não bater exatamente com o que está aqui, aqui é só pra gente matar a ansiedade antes dele soltar a versão oficial.
+        </p>
+        <h4 style="text-decoration:underline;">Metodologia</h4>
+        <button class="btn btn-primary btn-methodologies" id="alessandro-methodology-btn" onclick="changeMethodology(1)">Metodologia Alessandro</button>
+        <button class="btn btn-primary btn-methodologies disabled" id="rica-methodology-btn" onclick="changeMethodology(0)">Metodologia Rica perrone <small>(Aguardando)</small></button>
+        <button class="btn btn-primary btn-methodologies disabled" id="custom-methodology-btn" onclick="changeMethodology(2)">Personalizado <small>(Em construção)</small></button>
+        <div class="methodology-class py-3" id="custom-methodology">
+            <h5>Metodologia personalizada</h5>
+            <p>
+                Metodologia personalizada.
+            </p>
+        </div>
+        <div class="methodology-class py-3" id="rica-methodology">
+            <h5>Metodologia do Rica perrone</h5>
+            <p>
+                Essa metodologia pega na fonte <a href="https://pingback.com/ricaperrone/" target="_blank"> https://pingback.com/ricaperrone </a> o planejamento feito pelo Rica Perrone para cada time e compara com os resultados dos jogos, ela é bem mais acertiva pois leva em consideração a estimativa feita pelo próprio Rica Perrone para cada time levando em consideração os clássicos regionais e o poder aquisitivo de cada equipe.
+            </p>
+        </div>
+        <div class="methodology-class py-3" id="alessandro-methodology">
+            <h5>Metodologia do Alessandro</h5>
+            <p>
+                Essa metodologia foi criada por mim baseado na idéia do próprio Rica porém o meu não considera clássicos regionais, ele considera uma pontuação fixa de acordo com o peso de cada time.    
+            </p>
+            <p>
+                A minha previsão se baseia no seguinte:
+                <ul>
+                    <li>Contra times muito fortes a previsão é derrota dentro e fora de casa.</li>
+                    <li>Contra times fortes a previsão é derrota fora e vitória dentro de casa.</li>
+                    <li>Contra times médios a previsão é empate fora e vitória dentro de casa.</li>
+                    <li>Contra times fracos a previsão é vitória dentro e fora de casa.</li>
+                </ul>
+
+            </p>
+            <hr>
+            <h6 class="text-decoration-underline">Muito fortes</h6>
+            <p>
+                Aqui são os clubes que são cotados a serem os campeões do torneio mesmo antes dele começar, são elencos fortes e com histórico recente de vitórias, dentro desse grupo eu coloquei os seguintes clubes.
+            </p>
+            <ul id="clubes-mfortes" class="team-explanation"></ul>
+            <hr>
+            <h6 class="text-decoration-underline">Fortes</h6>
+            <p>
+                Aqui são os clubes que são tradicionais e históricamente classificados como clássicos, com uma torcida grande que faz diferênça nos jogos.
+            </p>
+            <ul id="clubes-fortes" class="team-explanation"></ul>
+            <hr>
+            <h6 class="text-decoration-underline">Médios</h6>
+            <p>
+                Aqui são os clubes menores que estão com elenco em crescimento.
+            </p>
+            <ul id="clubes-medios" class="team-explanation"></ul>
+            <hr>
+            <h6 class="text-decoration-underline">Pequenos</h6>
+            <p>
+                Aqui são os clubes menores com histórico oscilar entre séries A e B.
+            </p>
+            <ul id="clubes-pequenos" class="team-explanation"></ul>
+            <hr>
+        </div>
+    </div>
+    <div class="container mt-3 mb-5">
+        <div class="row gx-3">
+            <div class="col-md-3">
+                <div class="border border-2 border-dark">
+                    <table class="w-100">
+                        <thead>
+                            <tr>
+                                <th class="p-1 text-white bg-black">Classificação planejada</th>
+                                <th class="p-1 text-white bg-black">%</th>
+                            </tr>
+                        </thead>
+                        <tbody id='plannedClassification'></tbody>
+                    </table>
+                </div>
+                <div class="border border-2 border-dark mt-3">
+                    <table class="w-100">
+                        <tr class="titulo">
+                            <td>90%+</td>
+                            <td>Briga por título</td>
+                        </tr>
+                        <tr class="libertadores">
+                            <td>70%+</td>
+                            <td>Briga por libertadores</td>
+                        </tr>
+                        <tr class="intermediaria">
+                            <td></td>
+                            <td>Zona intermediária</td>
+                        </tr>
+                        <tr class="rebaixamento">
+                            <td>-62%</td>
+                            <td>Briga pra não cair</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-9 pt-3 pt-md-0">
+                <div class="row d-flex gx-1">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center flex-column text-center">
+                        <div class="border team-selected border-2 border-dark pb-4" style="height: 100%;">
+                            <div id="team-name"></div>
+                            <div class="my-3">
+                                <img alt="team shield" id="team-shield" src="#" width="73%">
+                            </div>
+                            <div class="mb-4">
+                                <button onclick="editRender()" class="btn btn-secondary btn-sm d-none">Editar previsão</button>
+                            </div>
+                            <div id="team-result" class="text-center">
+                                <table class="text-center border border-2 border-dark mx-auto">
+                                    <tr><td style="background-color: #ffc000; font-weight: bold;">Pontos previstos</td></tr>
+                                    <tr><td style="background-color: #ffd966; font-weight: bold;" id="prediction"></td></tr>
+                                    <tr><td style="background-color: #ffc000; font-weight: bold;">Pontos conquistados</td></tr>
+                                    <tr><td style="background-color: #ffd966; font-weight: bold;" id="succeed"></td></tr>
+                                    <tr><td style="background-color: #ffc000; font-weight: bold;">Aproveitamento</td></tr>
+                                    <tr><td style="background-color: #00b050; font-weight: bold;" id="used"></td></tr>
+                                </table>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 pt-3 pt-md-0">
+                        <div class="team-table border border-2 border-dark">
+                            <div class="row gx-0">
+                                <div class="col-md-6">
+                                    <table class="w-100 text-center">
+                                        <thead>
+                                            <tr>
+                                                <th class="p-1 text-white bg-black">1º Turno</th>
+                                                <th class="p-1 text-white bg-black">Previstos</th>
+                                                <th class="p-1 text-white bg-black">Conquistados</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="first-round"></tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="w-100 text-center">
+                                        <thead>
+                                            <tr>
+                                                <th class="p-1 text-white bg-black">2º Turno</th>
+                                                <th class="p-1 text-white bg-black">Previstos</th>
+                                                <th class="p-1 text-white bg-black">Conquistados</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="second-round"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-2 border-dark mt-1">
+                            <table class="w-100 text-center">
+                                <tr>
+                                    <td class="in_home" style="font-weight: bold;">Casa</td>
+                                    <td class="out_home" style="font-weight: bold;">Fora</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="./script_custom.js"></script>
+</body>
+</html>
