@@ -1,0 +1,61 @@
+* {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+#team-name{
+    font-size: 40px;
+    font-weight: bold;
+}
+td {
+    padding: 2px 10px;
+}
+td.in_home {
+    background-color: #f8cbad;
+}
+td.out_home {
+    background-color: #d0cece;
+}
+tr.titulo {
+    background-color: #a9d08e;
+    font-weight: bold;
+}
+tr.libertadores {
+    background-color: #c6e0b4;
+    font-weight: bold;
+}
+tr.intermediaria {
+    background-color: #ffd966;
+    font-weight: bold;
+}
+tr.rebaixamento {
+    background-color: #fc6c63;
+    font-weight: bold;
+}
+div#team-result div table tr{
+    font-weight: bold;
+}
+#team-shield{
+    filter: brightness(150%);
+    filter: contrast(150%);
+    filter: drop-shadow(5px 5px 5px #d9e1f2);
+}
+.team-selected {
+    background-color: #d0cece40;
+}
+.active_prediction {
+    background-color: #d0cece;
+    border-radius: 5px;
+}
+ul.team-explanation {
+    padding: 0px !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+li.team-explanation {
+    padding: 5px;
+    background-color: #f2f2f2;
+    border: 1px #d0cece solid;
+    list-style: none;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
