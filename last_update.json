@@ -3158,8 +3158,8 @@
                     "sigla": "CRU",
                     "escudo": "https:\/\/cdn.api-futebol.com.br\/escudos\/638d34984830b.svg"
                 },
-                "placar_mandante": null,
-                "placar_visitante": null,
+                "placar_mandante": 0,
+                "placar_visitante": 1,
                 "disputa_penalti": false,
                 "status": "agendado",
                 "slug": "fortaleza-cruzeiro-9296",
